@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% load tailwind_filters %}
+
+
+<div class="h-screen bg-white relative flex flex-col space-y-10 mt-8 items-center">
+    <h2 class="ml-3 text-xl">Change Title And Status Document</h2>    
+    <div class="bg-gray-100 md:shadow-lg shadow-none rounded p-6 w-96" >
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a href="{% url 'main:repo-admin'%}" class="ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Cancel</a>     
+        <button class="ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded" type="submit">Submit</button>
+    </form>
+  
+</div>
+</div>
+
+{% endblock content %}
+

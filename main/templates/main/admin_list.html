@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+{% load tailwind_filters %}
+
+
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-10">
+            <h1 class="sm:text-4x1 text-3xl font-medium title-font mb-2 text-gray-900">
+                List Documents
+            </h1>
+        </div>
+        <div class="lg:w-2/3 w-full mx-auto">
+            <table class="table-auto w-full text-left whitespace-nowrap">
+                <thead>
+                <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-t rounded-b">
+                        Document Name
+                    </th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                        Date Uploaded
+                    </th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                        Link Download
+                    </th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                        Status
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for repo in repos %}
+                    <tr>
+                        <td class="px-4 py-3">{{repo.title}}</td>
+                        <td class="px-4 py-3">{{repo.date_upload}}</td>
+                        <td class="px-4 py-3"><a href="{{repo.file.url}}">Download</a></td>
+                        <td class="px-4 py-3">
+                            <a href="{% url 'main:repo-update' repo.pk %}">
+                            {% if repo.status %}
+                            <span class="inline-flex bg-green-600 text-white rounded-full h-6 px-3 justify-center items-center">Active</span>
+                            {% else %}
+                            <span class="inline-flex bg-red-600 text-white rounded-full h-6 px-3 justify-center items-center">Inactive</span>
+                            
+                            {% endif %}
+                            </a>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+            <a href="{% url 'main:repo-upload' %}"><button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">ADD Document</button></a>
+        </div>
+      
+    </div>
+</section>
+{% endblock content %}
+
